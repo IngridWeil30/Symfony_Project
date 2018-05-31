@@ -4,10 +4,12 @@
 
     <table>
         <tbody>
+        {% if is_granted('ROLE_ADMIN') %}
         <tr>
             <th>Id</th>
             <td>{{ product.id }}</td>
         </tr>
+        {% endif %}
         <tr>
             <th>Title</th>
             <td>{{ product.title }}</td>
@@ -44,6 +46,7 @@
             <th>User owner</th>
             <td>{{ product.userowner }}</td>
         </tr>
+        {% if is_granted('ROLE_ADMIN') %}
         <tr>
             <th>Final_rating</th>
             <td>{{ product.ratingfinal }}</td>
@@ -52,6 +55,7 @@
             <th>nb rates</th>
             <td>{{ product.nbrates }}</td>
         </tr>
+        {% endif %}
 
         {% if product.userowner.id != app.user.id|default(0) %}
             <tr>

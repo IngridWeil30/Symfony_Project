@@ -1,0 +1,579 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Product
+ *
+ * @ORM\Table(name="product")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
+ */
+class Product
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255, unique=true)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="price", type="float")
+     */
+    private $price;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="ratingfinal", type="float", nullable=true)
+     */
+
+    private $ratingfinal;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbrates", type="integer", nullable=true)
+     */
+
+    private $nbrates;
+
+    /**
+     * @var Category
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="products")
+     * @ORM\JoinColumn(nullable=true)
+     */
+
+    private $category;
+
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Product_Rating", mappedBy="product", cascade={"persist", "remove"})
+     */
+
+    private $products_rating;
+
+
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+
+    private $user_owner;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="urlimage", type="text")
+     */
+    private $urlimage;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="minimum_bid", type="float", nullable=false)
+     */
+    private $minimumBid;
+
+
+    /**
+     * @var \datetime
+     * @Assert\GreaterThan("today")
+     * @ORM\Column(name="date_end_bid", type="datetime", nullable=false)
+     */
+    private $dateEndBid;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="immediate_price", type="float", nullable=false)
+     */
+    private $immediatePrice;
+
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="best_price", type="float", nullable=false)
+     */
+    private $bestPrice;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bidding", mappedBy="products", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+
+    protected $bidding;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_sold", type="boolean", length=255, nullable=true)
+     */
+    private $isSold;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Product
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Product
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Category $category
+     *
+     * @return Product
+     */
+    public function setCategory(\AppBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products_rating = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add productsRating
+     *
+     * @param \AppBundle\Entity\Product_Rating $productsRating
+     *
+     * @return Product
+     */
+    public function addProducts_Rating(\AppBundle\Entity\Product_Rating $productsRating)
+    {
+        $this->products_rating[] = $productsRating;
+
+        return $this;
+    }
+
+    /**
+     * Remove productsRating
+     *
+     * @param \AppBundle\Entity\Product_Rating $productsRating
+     */
+    public function removeProducts_Rating(\AppBundle\Entity\Product_Rating $productsRating)
+    {
+        $productsRating->setProduct(null);
+        $this->products_rating->removeElement($productsRating);
+    }
+
+    /**
+     * Get productsRating
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts_Rating()
+    {
+        return $this->products_rating;
+    }
+
+    /**
+     * Set ratingFinal
+     *
+     * @param float $ratingFinal
+     *
+     * @return Product
+     */
+    public function setRating_final($ratingFinal)
+    {
+        $this->ratingfinal = $ratingFinal;
+
+        return $this;
+    }
+
+    /**
+     * Get ratingFinal
+     *
+     * @return float
+     */
+    public function getRating_final()
+    {
+        return $this->ratingfinal;
+    }
+
+    /**
+     * Set nbRates
+     *
+     * @param integer $nbRates
+     *
+     * @return Product
+     */
+    public function setNbRates($nbRates)
+    {
+        $this->nbrates = $nbRates;
+
+        return $this;
+    }
+
+    /**
+     * Get nbRates
+     *
+     * @return integer
+     */
+    public function getNbRates()
+    {
+        return $this->nbrates;
+    }
+
+    /**
+     * Add productsRating
+     *
+     * @param \AppBundle\Entity\Product_Rating $productsRating
+     *
+     * @return Product
+     */
+    public function addProductsRating(\AppBundle\Entity\Product_Rating $productsRating)
+    {
+        $this->products_rating[] = $productsRating;
+
+        return $this;
+    }
+
+    /**
+     * Remove productsRating
+     *
+     * @param \AppBundle\Entity\Product_Rating $productsRating
+     */
+    public function removeProductsRating(\AppBundle\Entity\Product_Rating $productsRating)
+    {
+        $this->products_rating->removeElement($productsRating);
+    }
+
+    /**
+     * Get productsRating
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProductsRating()
+    {
+        return $this->products_rating;
+    }
+
+    /**
+     * Get ratingFinal
+     *
+     * @return float
+     */
+    public function getRatingFinal()
+    {
+        return $this->ratingfinal;
+    }
+
+    /**
+     * Set ratingFinal
+     *
+     * @param float $ratingFinal
+     *
+     * @return Product
+     */
+    public function setRatingFinal($ratingFinal)
+    {
+        $this->ratingfinal = $ratingFinal;
+
+        return $this;
+    }
+
+    /**
+     * Set userOwner
+     *
+     * @param \AppBundle\Entity\User $userOwner
+     *
+     * @return Product
+     */
+    public function setUserOwner(\AppBundle\Entity\User $userOwner = null)
+    {
+        $this->user_owner = $userOwner;
+
+        return $this;
+    }
+
+    /**
+     * Get userOwner
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUserOwner()
+    {
+        return $this->user_owner;
+    }
+
+    /**
+     * Set urlimage
+     *
+     * @param string $urlimage
+     *
+     * @return Product
+     */
+    public function setUrlimage($urlimage)
+    {
+        $this->urlimage = $urlimage;
+
+        return $this;
+    }
+
+    /**
+     * Get urlimage
+     *
+     * @return string
+     */
+    public function getUrlimage()
+    {
+        return $this->urlimage;
+    }
+
+    /**
+     * Set minimumBid
+     *
+     * @param float $minimumBid
+     *
+     * @return Product
+     */
+    public function setMinimumBid($minimumBid)
+    {
+        $this->minimumBid = $minimumBid;
+
+        return $this;
+    }
+
+    /**
+     * Get minimumBid
+     *
+     * @return float
+     */
+    public function getMinimumBid()
+    {
+        return $this->minimumBid;
+    }
+
+    /**
+     * Set dateEndBid
+     *
+     * @param \DateTime $dateEndBid
+     *
+     * @return Product
+     */
+    public function setDateEndBid($dateEndBid)
+    {
+        $this->dateEndBid = $dateEndBid;
+
+        return $this;
+    }
+
+    /**
+     * Get dateEndBid
+     *
+     * @return \DateTime
+     */
+    public function getDateEndBid()
+    {
+        return $this->dateEndBid;
+    }
+
+    /**
+     * Set immediatePrice
+     *
+     * @param float $immediatePrice
+     *
+     * @return Product
+     */
+    public function setImmediatePrice($immediatePrice)
+    {
+        $this->immediatePrice = $immediatePrice;
+
+        return $this;
+    }
+
+    /**
+     * Get immediatePrice
+     *
+     * @return float
+     */
+    public function getImmediatePrice()
+    {
+        return $this->immediatePrice;
+    }
+
+    /**
+     * Add bidding
+     *
+     * @param \AppBundle\Entity\Bidding $bidding
+     *
+     * @return Product
+     */
+    public function addBidding(\AppBundle\Entity\Bidding $bidding)
+    {
+        $bidding->setProducts($this);
+        $this->bidding[] = $bidding;
+
+        return $this;
+    }
+
+    /**
+     * Remove bidding
+     *
+     * @param \AppBundle\Entity\Bidding $bidding
+     */
+    public function removeBidding(\AppBundle\Entity\Bidding $bidding)
+    {
+        $bidding->setProducts(null);
+        $this->bidding->removeElement($bidding);
+    }
+
+    /**
+     * Get bidding
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBidding()
+    {
+        return $this->bidding;
+    }
+
+    /**
+     * Set isSold
+     *
+     * @param boolean $isSold
+     *
+     * @return Product
+     */
+    public function setIsSold($isSold)
+    {
+        $this->isSold = $isSold;
+
+        return $this;
+    }
+
+    /**
+     * Get isSold
+     *
+     * @return boolean
+     */
+    public function getIsSold()
+    {
+        return $this->isSold;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return Product
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+}
