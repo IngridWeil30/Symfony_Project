@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/Ibay/vendor/jdorn/sql-formatter" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/symfony/phpunit-bridge" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/composer" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/sensiolabs/security-checker" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/fig/link-util" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/sensio/framework-extra-bundle" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/sensio/distribution-bundle" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/sensio/generator-bundle" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/doctrine/doctrine-cache-bundle" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/friendsofsymfony/user-bundle" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/psr/link" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/symfony/polyfill-apcu" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/symfony/swiftmailer-bundle" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/symfony/polyfill-php56" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/symfony/polyfill-util" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/incenteev/composer-parameter-handler" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/symfony/monolog-bundle" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/symfony/symfony" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/symfony/polyfill-php70" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/Ibay/vendor/swiftmailer/swiftmailer" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="5.5.0" />
+</project>
