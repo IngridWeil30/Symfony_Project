@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Product_ratings</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Rating</th>
+                <th>Comment</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product_Rating in product_Ratings %}
+            <tr>
+                <td><a href="{{ path('product_rating_show', { 'id': product_Rating.id }) }}">{{ product_Rating.id }}</a></td>
+                <td>{{ product_Rating.rating }}</td>
+                <td>{{ product_Rating.comment }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('product_rating_show', { 'id': product_Rating.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('product_rating_edit', { 'id': product_Rating.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('product_rating_new') }}">Create a new product_Rating</a>
+        </li>
+    </ul>
+{% endblock %}

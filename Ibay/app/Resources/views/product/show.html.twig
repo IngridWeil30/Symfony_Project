@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Product</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ product.id }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ product.title }}</td>
+        </tr>
+        <tr>
+            <td><img src="{{ product.urlimage }}" width="200" height="200"></td>
+        </tr>
+
+
+        <tr>
+            <th>Bid</th>
+        {{ form_start(bidding_form) }}
+        {{ form_widget(bidding_form) }}
+        <input type="submit" value="Submit a bid" />
+        {{ form_end(bidding_form) }}
+        </tr>
+        <tr>
+            <th>Starting price</th>
+            <td>${{ product.price }}</td>
+        </tr>
+        <tr>
+            <th>Minimum bid</th>
+            <td>{{ product.minimumBid }}</td>
+        </tr>
+        <tr>
+            <th>Date end bid</th>
+            <td>{{ product.dateEndBid|date("d/m/Y H:i:s") }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ product.description }}</td>
+        </tr>
+        <tr>
+            <th>User owner</th>
+            <td>{{ product.userowner }}</td>
+        </tr>
+        <tr>
+            <th>Final_rating</th>
+            <td>{{ product.ratingfinal }}</td>
+        </tr>
+        <tr>
+            <th>nb rates</th>
+            <td>{{ product.nbrates }}</td>
+        </tr>
+
+        {% if product.userowner.id != app.user.id|default(0) %}
+            <tr>
+                <th>Comments/Rating</th>
+                <td>
+                    <ul>
+                        {% for productRating in product.products_rating %}
+                            <li>rating : {{ productRating.rating }} / 5</li>
+                            comment : {{ productRating.comment }}
+                        {% endfor %}
+                        <li>Add your own comment about this product :</li>
+                        {% if product.userowner.id != app.user.id|default(0) %}
+                            {{ form_start(rating_form) }}
+                            {{ form_widget(rating_form) }}
+                            <input type="submit" value="Submit your opinion"/>
+                            {{ form_end(rating_form) }}
+                        {% endif %}
+
+                    </ul>
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <p>
+            <a href="{{ path('product_index') }}">Back to the list</a>
+        </p>
+        <p>
+            <a href="{{ path('product_edit', { 'id': product.id }) }}">Edit</a>
+        </p>
+        <p>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </p>
+
+    {% elseif is_granted('ROLE_ADMIN') or product.userowner.id == app.user.id|default(0) %}
+        <p>
+            <a href="{{ path('product_edit', { 'id': product.id }) }}">Edit</a>
+        </p>
+        <p>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </p>
+    {% endif %}
+{% endblock %}

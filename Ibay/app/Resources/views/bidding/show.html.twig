@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Bidding</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bidding.id }}</td>
+            </tr>
+            <tr>
+                <th>Amount bid</th>
+                <td>${{ bidding.bid }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+        <p>
+            <a href="{{ path('bidding_index') }}">Back to the list</a>
+        </p>
+        <p>
+            <a href="{{ path('bidding_edit', { 'id': bidding.id }) }}">Edit</a>
+        </p>
+        <p>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </p>
+{% endblock %}

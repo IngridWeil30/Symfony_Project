@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>First name</th>
+            <td>{{ user.firstname }}</td>
+        </tr>
+        <tr>
+            <th>Last name</th>
+            <td>{{ user.lastname }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>User products</th>
+            <td>
+                <ul>
+                    {% for product in products %}
+                        <ul>
+                            {#<a href="/product/{{ product.id }}" class="list-group-item">{{ product.category }}</a>#}
+                            <li>
+                                <a href="{{ path('product_show', { 'id': product.id }) }}">{{ product.category }}/{{ product.title }}</a>
+                            </li>
+                        </ul>
+                    {% endfor %}
+                </ul>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        <a href="{{ path('user_index') }}">Back to the list</a><br>
+        <a href="{{ path('product_new', { 'id': user.id }) }}">Create a new product</a>
+        <a href="{{ path('user_edit', { 'id': user.id }) }}">Edit</a>
+    </p>
+    <p>
+        {{ form_start(delete_form) }}
+        <input type="submit" value="Delete">
+        {{ form_end(delete_form) }}
+    </p>
+
+{% endblock %}
